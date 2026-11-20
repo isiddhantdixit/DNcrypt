@@ -32,6 +32,7 @@
 
 - [Overview](#overview)
 - [Key Features](#key-features)
+- [Interactive 3D Simulation Studio](#interactive-3d-simulation-studio)
 - [Architecture & Data Pipeline](#architecture--data-pipeline)
 - [Biology Syllabus Alignment](#biology-syllabus-alignment)
 - [Encoding vs Encryption](#encoding-vs-encryption)
@@ -53,12 +54,13 @@ Digital archival data faces longevity and degradation challenges on magnetic and
 3. **Biological Representation:** Encrypted payloads are mapped to nucleotide sequences ($A, C, G, T$) via baseline 2-bit or constrained rotating algorithms.
 4. **Environmental Stress Testing:** An interactive **MutationLab** simulates point substitutions, frame-shifting indels, and fragment dropouts.
 5. **Exact Recovery:** The recovery pipeline corrects nucleotide errors, authenticates cryptographic tags, and verifies exact byte-for-byte reconstruction with **SHA-256**.
+6. **Real-Time 3D Simulation:** Interactive 3D double-helix simulation showcasing real-time digital-to-nucleotide synthesis, Watson-Crick pairing, point lesions, and in-silico repair.
 
 ---
 
 ## Key Features
 
-- **Continuous 3D Double-Helix Scene:** Built with **Three.js** and **React Three Fiber**, showcasing two intertwined antiparallel strands with distinct green/teal sugar-phosphate backbones, coordinating nucleotide base pairs, and mouse-directed 3D parallax.
+- **Interactive 3D Double-Helix Simulation:** Real-time 3D biophysical simulation built with **Three.js**, **React Three Fiber (R3F)**, and **Drei**. Supports live text synthesis, raycasting inspection, UV damage simulation, and algebraic error correction directly on the 3D model.
 - **BioCrypt Cryptographic Engine:** Authenticated encryption using AES-256-GCM. Generates unique 16-byte random salts and 12-byte nonces per session. Passwords and raw keys are strictly ephemeral and never stored.
 - **Dual DNA Encoding Strategies:**
   - *Baseline 2-bit:* Direct mapping (`00→A`, `01→C`, `10→G`, `11→T`) yielding 4 nucleotides per byte.
@@ -70,20 +72,33 @@ Digital archival data faces longevity and degradation challenges on magnetic and
 
 ---
 
+## Interactive 3D Simulation Studio
+
+DNcrypt includes a dedicated, interactive 3D simulation available both on the landing page and as a standalone studio (`/simulations`):
+
+| Simulation Mode | Description | Biophysical & Computational Concepts |
+|---|---|---|
+| **1. Bit-to-Base Encoding** | Real-time digital synthesis | Users input arbitrary ASCII text or binary bits (`01001100`). Watch bit-pairs ($00\to A, 01\to C, 10\to G, 11\to T$) assemble rung-by-rung along the double helix with playback controls. |
+| **2. 3D Structural Inspection** | Interactive 3D raycasting | Orbit, zoom, and click individual base pairs to inspect chemical properties, Purine vs. Pyrimidine types, 2-bit values, and hydrogen bond junctions (2 for A-T, 3 for C-G). |
+| **3. Mutation & RS Repair** | Stochastic damage & recovery | Click any base pair or simulate UV radiation to trigger point mutations and lesion states (highlighted in amber/rose). Click **RS Error Recovery** to watch Reed-Solomon $GF(2^8)$ error-locators restore the damaged base in real time. |
+| **4. Strand Unzipping** | Denaturation & replication | Dynamically decouples central hydrogen bonds and pulls the antiparallel strands ($5'\to 3'$ and $3'\to 5'$) apart in 3D space, simulating thermal denaturation. |
+
+---
+
 ## Architecture & Data Pipeline
 
 ```
 +-----------------------------------------------------------------------------------+
 |                         React + Three.js Interface                                |
-|  - Rotating 3D DNA double-helix scene with real-time mouse parallax               |
-|  - Pages: Home, Dashboard, Encode, Sequence Explorer, MutationLab,                 |
-|           Recovery Centre, Benchmark Lab, Documentation                           |
+|  - Real-time 3D DNA Simulation Studio (Three.js + R3F + Drei)                     |
+|  - Pages: Home, 3D Simulation, Dashboard, Encode, Sequence Explorer,             |
+|           MutationLab, Recovery Centre, Benchmark Lab, Documentation              |
 +-----------------------------------------+-----------------------------------------+
                                           | HTTP / REST (Vite Proxy: /api)
                                           v
 +-----------------------------------------------------------------------------------+
 |                            FastAPI Backend Engine                                 |
-|  - Session tracking via SQLite, Pydantic schemas, safe temp-file management        |
+|  - Session tracking via SQLite, Pydantic schemas, safe in-memory file streaming   |
 +-----------------------------------------+-----------------------------------------+
                                           |
          +--------------------------------+--------------------------------+
@@ -156,10 +171,10 @@ DNcrypt/
 ├── frontend/                     # React + TypeScript frontend
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── dna/              # 3D Double-Helix Scene & Canvas (Three.js/R3F)
+│   │   │   ├── dna/              # 3D Double-Helix Scene & Interactive Simulation Studio
 │   │   │   └── layout/           # Navbar, Footer, Page Layout
-│   │   ├── pages/                # Home, Dashboard, Encode, Explorer, MutationLab,
-│   │   │                         # Recovery, Benchmarks, About
+│   │   ├── pages/                # Home, Simulation, Dashboard, Encode, Explorer,
+│   │   │                         # MutationLab, Recovery, Benchmarks, About
 │   │   ├── services/             # API client & fetch handlers
 │   │   ├── styles/               # Tailwind theme & CSS
 │   │   └── types/                # TypeScript interfaces
@@ -241,13 +256,13 @@ backend\tests\test_encryption.py ...                                     [ 64%]
 backend\tests\test_error_correction.py ...                               [ 85%]
 backend\tests\test_mutation_and_recovery.py ..                           [100%]
 
-============================= 14 passed in 5.79s ==============================
+============================= 14 passed in 10.23s =============================
 ```
 
 Build verification:
 ```powershell
 npm run build --prefix frontend
-# Output: built in 31s with 0 errors
+# Output: built with 0 errors
 ```
 
 ---
