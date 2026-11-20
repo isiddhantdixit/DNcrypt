@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Dna, ShieldCheck, ExternalLink, Info } from 'lucide-react';
+import { Dna, ShieldCheck, ExternalLink, Info, Sparkles } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -29,9 +29,15 @@ export const Footer: React.FC = () => {
           {/* Quick Workflows */}
           <div>
             <h4 className="font-heading font-semibold text-xs uppercase tracking-wider text-[#FCFBF7] mb-3">
-              Workflows
+              Workflows & Simulations
             </h4>
             <ul className="space-y-2 text-xs">
+              <li>
+                <Link to="/simulations" className="hover:text-[#FCFBF7] transition-colors flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#8FAE91]" />
+                  <span>3D Interactive Simulation</span>
+                </Link>
+              </li>
               <li>
                 <Link to="/encode" className="hover:text-[#FCFBF7] transition-colors">Encode & Encrypt File</Link>
               </li>

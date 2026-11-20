@@ -9,6 +9,7 @@ import { MutationLabPage } from './pages/MutationLabPage';
 import { RecoveryPage } from './pages/RecoveryPage';
 import { BenchmarkPage } from './pages/BenchmarkPage';
 import { AboutPage } from './pages/AboutPage';
+import { SimulationPage } from './pages/SimulationPage';
 
 export const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="simulations" element={<SimulationPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="encode" element={<EncodePage />} />
           <Route path="explorer" element={<ExplorerPage />} />

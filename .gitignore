@@ -10,6 +10,7 @@ dist/
 frontend/dist/
 .vite/
 frontend/.vite/
+*.tsbuildinfo
 
 # Python cache & databases
 __pycache__/

@@ -18,6 +18,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { DnaCanvas } from '../components/dna/DnaCanvas';
+import { InteractiveDnaSimulation } from '../components/dna/InteractiveDnaSimulation';
 
 export const HomePage: React.FC = () => {
   return (
@@ -72,11 +73,11 @@ export const HomePage: React.FC = () => {
               </Link>
 
               <Link
-                to="/about"
+                to="/simulations"
                 className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl bg-[#F5F1E7] text-[#173F35] border border-[#DCE8D9] text-sm font-semibold hover:bg-[#EAE3D2] transition-colors whitespace-nowrap"
               >
-                <Microscope className="w-4 h-4 text-[#2A6F5E]" />
-                <span>Explore the Technology</span>
+                <Sparkles className="w-4 h-4 text-[#2A6F5E]" />
+                <span>3D Interactive Simulation</span>
               </Link>
             </motion.div>
 
@@ -144,7 +145,38 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. End-to-End Workflow Section */}
+      {/* 2. Brand New: Complete Interactive 3D Simulation Section */}
+      <section className="py-20 bg-[#FCFBF7] border-b border-[#DCE8D9] px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#EAF0E9] border border-[#BFD4BD] text-[#173F35] text-xs font-semibold">
+                <Sparkles className="w-3.5 h-3.5 text-[#2A6F5E]" />
+                <span>Real-Time 3D Biophysical Simulation</span>
+              </div>
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#102F28]">
+                Interactive 3D Simulation: How DNA Encoding Works
+              </h2>
+              <p className="text-xs sm:text-sm text-[#777C76] max-w-2xl leading-relaxed">
+                Interact with a live 3D double helix model. Type any text to observe bit-to-base translation, rotate with your mouse, simulate environmental UV damage, and execute Reed-Solomon recovery directly in the canvas.
+              </p>
+            </div>
+
+            <Link
+              to="/simulations"
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-[#173F35] text-[#FCFBF7] text-xs font-semibold hover:bg-[#102F28] transition-all shadow-xs flex-shrink-0"
+            >
+              <span>Open Full 3D Simulation Studio</span>
+              <ArrowRight className="w-4 h-4 ml-0.5" />
+            </Link>
+          </div>
+
+          {/* Embedded Interactive 3D Simulation */}
+          <InteractiveDnaSimulation initialText="DNA" />
+        </div>
+      </section>
+
+      {/* 3. End-to-End Workflow Section */}
       <section className="py-20 bg-[#F5F1E7]/70 border-b border-[#DCE8D9] px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -216,7 +248,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Core Capabilities Grid */}
+      {/* 4. Core Capabilities Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
           <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#102F28]">
@@ -284,7 +316,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Biology Syllabus & In-Silico Notice */}
+      {/* 5. Biology Syllabus & In-Silico Notice */}
       <section className="py-16 bg-[#173F35] text-[#FCFBF7] px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">

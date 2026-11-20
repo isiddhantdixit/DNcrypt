@@ -8,11 +8,13 @@ import {
   BarChart3,
   BookOpen,
   LayoutDashboard,
+  Sparkles,
   Menu,
   X
 } from 'lucide-react';
 
 const navItems = [
+  { name: '3D Simulation', shortName: 'Simulation', path: '/simulations', icon: Sparkles },
   { name: 'Dashboard', shortName: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   { name: 'Encode File', shortName: 'Encode File', path: '/encode', icon: Binary },
   { name: 'Sequence Explorer', shortName: 'Sequence Explorer', path: '/explorer', icon: Dna },
@@ -30,7 +32,7 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-40 bg-[#FCFBF7]/95 backdrop-blur-md border-b border-[#DCE8D9] transition-all">
       <div className="w-full px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
         <div className="flex items-center justify-between h-16 w-full">
-          {/* Left: Brand Logo & Title (Moved to the left) */}
+          {/* Left: Brand Logo & Title */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2.5 group">
               <div className="w-8 h-8 rounded-lg bg-[#173F35] flex items-center justify-center text-[#F5F1E7] shadow-xs group-hover:bg-[#102F28] transition-colors">
@@ -47,8 +49,8 @@ export const Navbar: React.FC = () => {
             </Link>
           </div>
 
-          {/* Right: Desktop Navigation Links (Spacious, clean, single row) */}
-          <nav className="hidden lg:flex items-center justify-end space-x-1 xl:space-x-2 flex-1 pl-6">
+          {/* Right: Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center justify-end space-x-1 xl:space-x-1.5 flex-1 pl-4">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
@@ -56,7 +58,7 @@ export const Navbar: React.FC = () => {
                 <NavLink
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs xl:text-[13px] font-medium whitespace-nowrap transition-colors flex-shrink-0 ${
+                  className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs xl:text-[13px] font-medium whitespace-nowrap transition-colors flex-shrink-0 ${
                     isActive
                       ? 'bg-[#173F35] text-[#FCFBF7] shadow-xs'
                       : 'text-[#202B25] hover:text-[#173F35] hover:bg-[#F5F1E7]'
